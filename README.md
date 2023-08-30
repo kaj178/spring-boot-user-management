@@ -2,15 +2,24 @@
 
 User management app using spring boot 3, with api written at server and client gets api using ajax
 
+
 ## Contents
 
 - [Features](#feature)
+- [Requirements](#requirements)
 - [Installation](#installation)
+
 
 ## Feature
 
 Read all users, create, update and delete user
 
+
+## Requirements
+- Text editors or IDE
+- JDK 8, 11, 17
+- MySQL Workbench
+- Test API tools such as Postman, etc...
 
 ## Installation
 
@@ -23,10 +32,10 @@ To clone and run this project on your local machine, follow these steps:
 4. Change the directory to the project's root folder:
     ```bash
     cd spring-boot-user-management   
-5. Run the main app class
-6. Access to `http://localhost:8080` and just naughty :>>
-
+5. Copy the `schema.sql` to the mysql database
+6. Run the main app class
+7. Access to `http://localhost:8080` and just naughty :>>
 
 ---
 
-Project created by [KAJ](https://github.com/kaj) in his studying path ^^.
+Project created by [KAJ](https://github.com/kaj178) in his studying path ^^.
