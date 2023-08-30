@@ -1,6 +1,7 @@
 # User management
 
-User management app using spring boot 3, with api written at server and client gets api using ajax
+User management app using spring boot 3, with api written at server and client gets api using ajax.
+And the main purpose of this project is to learn to write api using spring boot
 
 
 ## Contents
