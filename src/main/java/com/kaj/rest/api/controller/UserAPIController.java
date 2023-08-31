@@ -1,7 +1,7 @@
 package com.kaj.rest.api.controller;
 
-import com.kaj.rest.model.User;
-import com.kaj.rest.service.UserApiServiceImplement;
+import com.kaj.rest.api.model.User;
+import com.kaj.rest.api.service.UserApiServiceImplement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

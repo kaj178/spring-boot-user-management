@@ -1,8 +1,8 @@
 package com.kaj.rest.api.controller;
 
-import com.kaj.rest.api.controller.exception.UserExistedException;
-import com.kaj.rest.api.controller.exception.UserNotFoundException;
-import com.kaj.rest.model.ErrorMessage;
+import com.kaj.rest.api.exception.UserExistedException;
+import com.kaj.rest.api.exception.UserNotFoundException;
+import com.kaj.rest.api.model.ErrorMessage;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

@@ -1,6 +1,6 @@
-package com.kaj.rest.repository;
+package com.kaj.rest.api.repository;
 
-import com.kaj.rest.model.User;
+import com.kaj.rest.api.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.kaj.rest.model;
+package com.kaj.rest.api.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
