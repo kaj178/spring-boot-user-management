@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserApiServiceImplement implements UserApiService {
+public class UserApiServiceImpl implements UserApiService {
     @Autowired
     private UserRepository userRepository;
 
