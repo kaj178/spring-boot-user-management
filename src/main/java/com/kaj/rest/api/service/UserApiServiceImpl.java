@@ -5,7 +5,12 @@ import com.kaj.rest.api.exception.UserNotFoundException;
 import com.kaj.rest.api.model.ApiResponse;
 import com.kaj.rest.api.model.User;
 import com.kaj.rest.api.repository.UserRepository;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -19,11 +24,22 @@ public class UserApiServiceImpl implements UserApiService {
     @Autowired
     private UserRepository userRepository;
 
+    // Http response status: 200
     @Override
     public ResponseEntity<?> getAllUsers() {
-        // Http response status: 200
         List<User> userList = userRepository.findAll();
         ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), userList);
+        return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+    }
+
+    @Override
+    // Http response status: 200
+    public ResponseEntity<?> getUsersPaginated(int page) {
+        // PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by("fieldName"));
+        Pageable paging = PageRequest.of(page, 5, Sort.by("id").ascending());
+        Page<User> userList = userRepository.findAll(paging);
+        // Convert Page instance to List instance
+        ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), userList.stream().toList());
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 

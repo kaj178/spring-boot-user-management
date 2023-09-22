@@ -12,15 +12,20 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/users")
-public class UserAPIController {
+public class UserApiController {
     @Autowired
     private UserApiServiceImpl apiService;
     @Autowired
     private ExcelExporter exporter;
 
-    @GetMapping
-    public ResponseEntity<?> readUsers() {
+    @GetMapping()
+    public ResponseEntity<?> getAllUsers() {
         return apiService.getAllUsers();
+    }
+
+    @GetMapping(params = "page")
+    public ResponseEntity<?> readUsers(@RequestParam("page") int page) {
+        return apiService.getUsersPaginated(page - 1);
     }
 
     @GetMapping("/{id}")
