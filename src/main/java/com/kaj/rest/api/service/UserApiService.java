@@ -9,11 +9,11 @@ public interface UserApiService {
 
     ResponseEntity<?> getUsersPaginated(int page);
 
-    ResponseEntity<?> getUserById(Integer id);
+    ResponseEntity<?> getUserById(Long id);
 
     ResponseEntity<?> addUser(User user);
 
-    ResponseEntity<?> updateUser(Integer id, User user);
+    ResponseEntity<?> updateUser(Long id, User user);
 
-    ResponseEntity<?> deleteUser(Integer id);
+    ResponseEntity<?> deleteUser(Long id);
 }

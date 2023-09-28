@@ -5,7 +5,6 @@ import com.kaj.rest.api.exception.UserNotFoundException;
 import com.kaj.rest.api.model.ApiResponse;
 import com.kaj.rest.api.model.User;
 import com.kaj.rest.api.repository.UserRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -36,7 +35,7 @@ public class UserApiServiceImpl implements UserApiService {
     // Http response status: 200
     public ResponseEntity<?> getUsersPaginated(int page) {
         // PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by("fieldName"));
-        Pageable paging = PageRequest.of(page, 5, Sort.by("id").ascending());
+        Pageable paging = PageRequest.of(page, 5, Sort.by("user_id").ascending());
         Page<User> userList = userRepository.findAll(paging);
         // Convert Page instance to List instance
         ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), userList.stream().toList());
@@ -44,7 +43,7 @@ public class UserApiServiceImpl implements UserApiService {
     }
 
     @Override
-    public ResponseEntity<?> getUserById(Integer id) {
+    public ResponseEntity<?> getUserById(Long id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             // Http response status: 409
@@ -60,7 +59,7 @@ public class UserApiServiceImpl implements UserApiService {
     @Override
     public ResponseEntity<?> addUser(User user) {
         List<String> responseList = new LinkedList<>();
-        Optional<User> userOptional = userRepository.findById(user.getId());
+        Optional<User> userOptional = userRepository.findById(user.getUser_id());
         if (userOptional.isPresent()) {
             throw new UserExistedException("User existed!");
         }
@@ -72,7 +71,7 @@ public class UserApiServiceImpl implements UserApiService {
     }
 
     @Override
-    public ResponseEntity<?> updateUser(Integer id, User newUser) {
+    public ResponseEntity<?> updateUser(Long id, User newUser) {
         List<String> responseList = new LinkedList<>();
         Optional<User> userOptional = userRepository.findById(id);
         // Kiểm tra xem entity có trong database hay không
@@ -92,7 +91,7 @@ public class UserApiServiceImpl implements UserApiService {
     }
 
     @Override
-    public ResponseEntity<?> deleteUser(Integer id) {
+    public ResponseEntity<?> deleteUser(Long id) {
         List<String> responseList = new LinkedList<>();
         Optional<User> userOptional = userRepository.findById(id);
         if (!userOptional.isPresent()) {

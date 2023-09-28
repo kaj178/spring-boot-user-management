@@ -42,7 +42,7 @@ public class ExcelExporter {
         int rowIndex = 1;
         for (User user: userList) {
             Row row = sheet.createRow(rowIndex);
-            row.createCell(0).setCellValue(user.getId());
+            row.createCell(0).setCellValue(user.getUser_id());
             row.createCell(1).setCellValue(user.getName());
             row.createCell(2).setCellValue(user.getGender());
             row.createCell(3).setCellValue(user.getStatus());

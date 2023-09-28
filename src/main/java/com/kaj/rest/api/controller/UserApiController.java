@@ -29,7 +29,7 @@ public class UserApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> readUserById(@PathVariable Integer id) {
+    public ResponseEntity<?> readUserById(@PathVariable Long id) {
         return apiService.getUserById(id);
     }
 
@@ -40,14 +40,14 @@ public class UserApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(
-            @PathVariable Integer id,
+            @PathVariable Long id,
             @RequestBody User user
     ) {
         return apiService.updateUser(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         return apiService.deleteUser(id);
     }
 

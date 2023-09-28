@@ -33,7 +33,7 @@ To clone and run this project on your local machine, follow these steps:
 4. Change the directory to the project's root folder:
     ```bash
     cd spring-boot-user-management   
-5. Copy the `schema.sql` to the mysql database
+5. Copy the `mysql_schema.sql` to the mysql database
 6. Run the main app class
 7. Access to `http://localhost:8080` and just naughty :>>
 

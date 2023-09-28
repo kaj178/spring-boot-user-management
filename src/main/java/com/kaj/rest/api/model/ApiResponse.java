@@ -12,4 +12,9 @@ import java.util.List;
 public class ApiResponse<T> {
     private int status;
     private List<T> data;
+
+//    public ApiResponse(int value, List<T> userList) {
+//        this.status = value;
+//        this.data = userList;
+//    }
 }

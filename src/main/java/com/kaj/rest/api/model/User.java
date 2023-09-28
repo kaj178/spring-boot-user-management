@@ -4,19 +4,20 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user_info")
 @Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(columnDefinition = "serial")
+    private Long user_id;
 
-    @Column(name = "name")
+    @Column(name = "user_name")
     private String name;
 
-    @Column(name = "gender")
+    @Column(name = "user_gender")
     private String gender;
 
-    @Column(name = "status")
+    @Column(name = "user_status")
     private String status;
 }
