@@ -1,7 +1,6 @@
 package com.kaj.rest.api.service;
 
-import com.kaj.rest.api.model.User;
-import org.springframework.data.domain.Page;
+import com.kaj.rest.api.model.entities.User;
 import org.springframework.http.ResponseEntity;
 
 public interface UserApiService {

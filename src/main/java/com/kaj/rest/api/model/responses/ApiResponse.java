@@ -1,4 +1,4 @@
-package com.kaj.rest.api.model;
+package com.kaj.rest.api.model.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package com.kaj.rest.api.service;
 
-import com.kaj.rest.api.model.User;
+import com.kaj.rest.api.model.entities.User;
 import com.kaj.rest.api.repository.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.*;

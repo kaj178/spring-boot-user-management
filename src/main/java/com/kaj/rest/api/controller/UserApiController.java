@@ -1,6 +1,6 @@
 package com.kaj.rest.api.controller;
 
-import com.kaj.rest.api.model.User;
+import com.kaj.rest.api.model.entities.User;
 import com.kaj.rest.api.service.ExcelExporter;
 import com.kaj.rest.api.service.UserApiServiceImpl;
 import jakarta.servlet.http.HttpServletResponse;

@@ -2,8 +2,8 @@ package com.kaj.rest.api.service;
 
 import com.kaj.rest.api.exception.UserExistedException;
 import com.kaj.rest.api.exception.UserNotFoundException;
-import com.kaj.rest.api.model.ApiResponse;
-import com.kaj.rest.api.model.User;
+import com.kaj.rest.api.model.responses.ApiResponse;
+import com.kaj.rest.api.model.entities.User;
 import com.kaj.rest.api.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
