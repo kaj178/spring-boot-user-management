@@ -9,8 +9,7 @@ import lombok.Data;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
-    private Long user_id;
+    private String user_id;
 
     @Column(name = "user_name")
     private String name;

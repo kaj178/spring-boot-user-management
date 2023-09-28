@@ -43,7 +43,7 @@ public class UserApiServiceImpl implements UserApiService {
     }
 
     @Override
-    public ResponseEntity<?> getUserById(Long id) {
+    public ResponseEntity<?> getUserById(String id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             // Http response status: 409
@@ -71,7 +71,7 @@ public class UserApiServiceImpl implements UserApiService {
     }
 
     @Override
-    public ResponseEntity<?> updateUser(Long id, User newUser) {
+    public ResponseEntity<?> updateUser(String id, User newUser) {
         List<String> responseList = new LinkedList<>();
         Optional<User> userOptional = userRepository.findById(id);
         // Kiểm tra xem entity có trong database hay không
@@ -91,7 +91,7 @@ public class UserApiServiceImpl implements UserApiService {
     }
 
     @Override
-    public ResponseEntity<?> deleteUser(Long id) {
+    public ResponseEntity<?> deleteUser(String id) {
         List<String> responseList = new LinkedList<>();
         Optional<User> userOptional = userRepository.findById(id);
         if (!userOptional.isPresent()) {
