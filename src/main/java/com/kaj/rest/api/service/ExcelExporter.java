@@ -32,7 +32,7 @@ public class ExcelExporter {
         headerFont.setColor(IndexedColors.BLACK.getIndex());
         headerCellStyle.setFont(headerFont);
 
-        String[] columns = {"ID", "Name", "Gender", "Status"};
+        String[] columns = {"ID", "Last name", "First name", "Date of birth", "Email", "Phone number", "Gender"};
         for (int i = 0; i < columns.length; i++) {
             Cell cell = headerRow.createCell(i);
             cell.setCellValue(columns[i]);
@@ -42,10 +42,13 @@ public class ExcelExporter {
         int rowIndex = 1;
         for (User user: userList) {
             Row row = sheet.createRow(rowIndex);
-            row.createCell(0).setCellValue(user.getUser_id());
-            row.createCell(1).setCellValue(user.getName());
-            row.createCell(2).setCellValue(user.getGender());
-            row.createCell(3).setCellValue(user.getStatus());
+            row.createCell(0).setCellValue(user.getUserID());
+            row.createCell(1).setCellValue(user.getUserLastName());
+            row.createCell(2).setCellValue(user.getUserFirstName());
+            row.createCell(3).setCellValue(user.getUserBirthDay());
+            row.createCell(4).setCellValue(user.getUserEmail());
+            row.createCell(5).setCellValue(user.getUserPhone());
+            row.createCell(6).setCellValue(user.getUserGender());
             rowIndex++;
         }
 

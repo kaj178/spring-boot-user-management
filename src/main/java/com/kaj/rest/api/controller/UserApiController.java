@@ -2,7 +2,7 @@ package com.kaj.rest.api.controller;
 
 import com.kaj.rest.api.model.entities.User;
 import com.kaj.rest.api.service.ExcelExporter;
-import com.kaj.rest.api.service.UserApiServiceImpl;
+import com.kaj.rest.api.service.UserApiService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import java.io.IOException;
 @RequestMapping("/api/users")
 public class UserApiController {
     @Autowired
-    private UserApiServiceImpl apiService;
+    private UserApiService apiService;
     @Autowired
     private ExcelExporter exporter;
 

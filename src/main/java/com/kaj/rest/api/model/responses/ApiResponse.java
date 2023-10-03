@@ -11,6 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ApiResponse<T> {
     private int status;
+    private String message;
     private List<T> data;
 
 //    public ApiResponse(int value, List<T> userList) {

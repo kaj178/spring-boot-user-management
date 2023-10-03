@@ -1,7 +1,6 @@
 package com.kaj.rest.api.model.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
