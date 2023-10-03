@@ -1,10 +1,9 @@
 package com.kaj.rest.api.controller;
 
 import com.kaj.rest.api.model.entities.User;
-import com.kaj.rest.api.service.ExcelExporter;
+import com.kaj.rest.api.service.ExcelExpoter;
 import com.kaj.rest.api.service.UserApiService;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +12,13 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/users")
 public class UserApiController {
-    @Autowired
     private UserApiService apiService;
-    @Autowired
-    private ExcelExporter exporter;
+    private ExcelExpoter exporter;
+
+    public UserApiController(UserApiService service, ExcelExpoter exporter) {
+        this.apiService = service;
+        this.exporter = exporter;
+    }
 
     @GetMapping()
     public ResponseEntity<?> getAllUsers() {

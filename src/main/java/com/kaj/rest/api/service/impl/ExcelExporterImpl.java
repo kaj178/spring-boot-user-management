@@ -1,7 +1,9 @@
-package com.kaj.rest.api.service;
+package com.kaj.rest.api.service.impl;
 
 import com.kaj.rest.api.model.entities.User;
 import com.kaj.rest.api.repository.UserRepository;
+import com.kaj.rest.api.service.ExcelExpoter;
+
 import jakarta.servlet.http.HttpServletResponse;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFFont;
@@ -13,9 +15,12 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class ExcelExporter {
-    @Autowired
+public class ExcelExporterImpl implements ExcelExpoter {
     private UserRepository repository;
+
+    public ExcelExporterImpl(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public void writeExcel(HttpServletResponse response) throws IOException {
         List<User> userList = repository.findAll();

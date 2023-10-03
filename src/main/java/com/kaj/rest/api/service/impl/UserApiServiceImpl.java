@@ -6,7 +6,6 @@ import com.kaj.rest.api.model.responses.ApiResponse;
 import com.kaj.rest.api.model.entities.User;
 import com.kaj.rest.api.repository.UserRepository;
 import com.kaj.rest.api.service.UserApiService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,8 +20,11 @@ import java.util.Optional;
 
 @Service
 public class UserApiServiceImpl implements UserApiService {
-    @Autowired
     private UserRepository userRepository;
+
+    public UserApiServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     // Http response status: 200
     @Override
