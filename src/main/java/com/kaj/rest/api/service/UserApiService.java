@@ -1,7 +1,6 @@
 package com.kaj.rest.api.service;
 
-import com.kaj.rest.api.model.User;
-import org.springframework.data.domain.Page;
+import com.kaj.rest.api.model.entities.User;
 import org.springframework.http.ResponseEntity;
 
 public interface UserApiService {
@@ -9,11 +8,11 @@ public interface UserApiService {
 
     ResponseEntity<?> getUsersPaginated(int page);
 
-    ResponseEntity<?> getUserById(Integer id);
+    ResponseEntity<?> getUserById(String id);
 
     ResponseEntity<?> addUser(User user);
 
-    ResponseEntity<?> updateUser(Integer id, User user);
+    ResponseEntity<?> updateUser(String id, User user);
 
-    ResponseEntity<?> deleteUser(Integer id);
+    ResponseEntity<?> deleteUser(String id);
 }

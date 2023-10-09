@@ -1,10 +1,9 @@
 package com.kaj.rest.api.controller;
 
-import com.kaj.rest.api.model.User;
-import com.kaj.rest.api.service.ExcelExporter;
-import com.kaj.rest.api.service.UserApiServiceImpl;
+import com.kaj.rest.api.model.entities.User;
+import com.kaj.rest.api.service.ExcelExpoter;
+import com.kaj.rest.api.service.UserApiService;
 import jakarta.servlet.http.HttpServletResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,10 +12,13 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/users")
 public class UserApiController {
-    @Autowired
-    private UserApiServiceImpl apiService;
-    @Autowired
-    private ExcelExporter exporter;
+    private UserApiService apiService;
+    private ExcelExpoter exporter;
+
+    public UserApiController(UserApiService service, ExcelExpoter exporter) {
+        this.apiService = service;
+        this.exporter = exporter;
+    }
 
     @GetMapping()
     public ResponseEntity<?> getAllUsers() {
@@ -29,7 +31,7 @@ public class UserApiController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> readUserById(@PathVariable Integer id) {
+    public ResponseEntity<?> readUserById(@PathVariable String id) {
         return apiService.getUserById(id);
     }
 
@@ -40,14 +42,14 @@ public class UserApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(
-            @PathVariable Integer id,
+            @PathVariable String id,
             @RequestBody User user
     ) {
         return apiService.updateUser(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
+    public ResponseEntity<?> deleteUser(@PathVariable String id) {
         return apiService.deleteUser(id);
     }
 

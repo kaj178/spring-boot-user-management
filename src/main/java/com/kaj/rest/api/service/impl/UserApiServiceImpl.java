@@ -1,12 +1,11 @@
-package com.kaj.rest.api.service;
+package com.kaj.rest.api.service.impl;
 
 import com.kaj.rest.api.exception.UserExistedException;
 import com.kaj.rest.api.exception.UserNotFoundException;
-import com.kaj.rest.api.model.ApiResponse;
-import com.kaj.rest.api.model.User;
+import com.kaj.rest.api.model.responses.ApiResponse;
+import com.kaj.rest.api.model.entities.User;
 import com.kaj.rest.api.repository.UserRepository;
-import org.apache.coyote.Response;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.kaj.rest.api.service.UserApiService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -21,14 +20,17 @@ import java.util.Optional;
 
 @Service
 public class UserApiServiceImpl implements UserApiService {
-    @Autowired
     private UserRepository userRepository;
+
+    public UserApiServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     // Http response status: 200
     @Override
     public ResponseEntity<?> getAllUsers() {
         List<User> userList = userRepository.findAll();
-        ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), userList);
+        ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), "Read users successfully!", userList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
@@ -36,15 +38,15 @@ public class UserApiServiceImpl implements UserApiService {
     // Http response status: 200
     public ResponseEntity<?> getUsersPaginated(int page) {
         // PageRequest pageRequest = PageRequest.of(pageNumber, pageSize, Sort.by("fieldName"));
-        Pageable paging = PageRequest.of(page, 5, Sort.by("id").ascending());
+        Pageable paging = PageRequest.of(page, 5, Sort.by("user_id").ascending());
         Page<User> userList = userRepository.findAll(paging);
         // Convert Page instance to List instance
-        ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), userList.stream().toList());
+        ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), "Export successfully!", userList.stream().toList());
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> getUserById(Integer id) {
+    public ResponseEntity<?> getUserById(String id) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {
             // Http response status: 409
@@ -53,55 +55,61 @@ public class UserApiServiceImpl implements UserApiService {
         // Http response status: 201
         // Change optional object to list object
         List<User> userList =  userOptional.stream().toList();
-        ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), userList);
+        ApiResponse<User> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), "Read user successfully!", userList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @Override
     public ResponseEntity<?> addUser(User user) {
-        List<String> responseList = new LinkedList<>();
-        Optional<User> userOptional = userRepository.findById(user.getId());
+        List<Boolean> responseList = new LinkedList<>();
+        Optional<User> userOptional = userRepository.findById(user.getUserID());
         if (userOptional.isPresent()) {
             throw new UserExistedException("User existed!");
+        } else {
+            // Http response status: 200
+            userRepository.save(user);
         }
-        // Http response status: 200
-        userRepository.save(user);
-        responseList.add("Add user successfully!");
-        ApiResponse apiResponse = new ApiResponse(HttpStatus.CREATED.value(), responseList);
+        responseList.add(true);
+        ApiResponse<Boolean> apiResponse = new ApiResponse<>(HttpStatus.CREATED.value(), "Create user successfully!", responseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
     }
 
     @Override
-    public ResponseEntity<?> updateUser(Integer id, User newUser) {
-        List<String> responseList = new LinkedList<>();
+    public ResponseEntity<?> updateUser(String id, User newUser) {
+        List<Boolean> responseList = new LinkedList<>();
         Optional<User> userOptional = userRepository.findById(id);
+
         // Kiểm tra xem entity có trong database hay không
         // Sau đó lấy entity đó ra và cập nhật các thuộc tính của object được gửi đến
         if (!userOptional.isPresent()) {
             throw new UserNotFoundException("User not found!");
+        } else {
+            User user = userOptional.get();
+            user.setUserID(newUser.getUserID());
+            user.setUserLastName(newUser.getUserLastName());
+            user.setUserFirstName(newUser.getUserFirstName());
+            user.setUserBirthDay(newUser.getUserBirthDay());
+            user.setUserEmail(newUser.getUserEmail());
+            user.setUserPhone(newUser.getUserPhone());
+            user.setUserGender(newUser.getUserGender());
+            userRepository.save(user);
         }
-        User user = userOptional.get();
-        user.setName(newUser.getName());
-        user.setGender(newUser.getGender());
-        user.setStatus(newUser.getStatus());
-        userRepository.save(user);
-
-        responseList.add("Update user successfully!");
-        ApiResponse<String> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), responseList);
+        responseList.add(true);
+        ApiResponse<Boolean> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), "Update user successfully!", responseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 
     @Override
-    public ResponseEntity<?> deleteUser(Integer id) {
-        List<String> responseList = new LinkedList<>();
+    public ResponseEntity<?> deleteUser(String id) {
+        List<Boolean> responseList = new LinkedList<>();
         Optional<User> userOptional = userRepository.findById(id);
         if (!userOptional.isPresent()) {
             throw new UserNotFoundException("User not found!");
+        } else {
+            userRepository.deleteById(id);
         }
-        userRepository.deleteById(id);
-
-        responseList.add("Delete user successfully!");
-        ApiResponse<String> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), responseList);
+        responseList.add(true);
+        ApiResponse<Boolean> apiResponse = new ApiResponse<>(HttpStatus.OK.value(), "Delete user successfully!", responseList);
         return new ResponseEntity<>(apiResponse, HttpStatus.OK);
     }
 }

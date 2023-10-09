@@ -1,4 +1,4 @@
-package com.kaj.rest.api.model;
+package com.kaj.rest.api.model.responses;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,5 +11,11 @@ import java.util.List;
 @AllArgsConstructor
 public class ApiResponse<T> {
     private int status;
+    private String message;
     private List<T> data;
+
+//    public ApiResponse(int value, List<T> userList) {
+//        this.status = value;
+//        this.data = userList;
+//    }
 }

@@ -29,7 +29,7 @@ $(document).ready(function () {
                     // console.log(user.gender)
                     tableInfo += `
 				<tr>
-					<td>${user.id}</td>
+					<td>${user.user_id}</td>
 					<td>${user.name}</td>
 					<td>${user.gender}</td>
 					<td>${user.status}</td>
@@ -40,7 +40,7 @@ $(document).ready(function () {
                 </tr>
 			`
                 })
-                // console.log(tableInfo)
+                console.log(tableInfo)
                 tableBody.innerHTML = tableInfo
             })
             .catch(error => console.log(error))
