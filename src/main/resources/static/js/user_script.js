@@ -26,17 +26,20 @@ $(document).ready(function () {
                 console.log(data)
                 let tableInfo = ""
                 data.data.forEach(user => {
-                    // console.log(user.gender)
+                    console.log(user)
                     tableInfo += `
 				<tr>
-					<td>${user.user_id}</td>
-					<td>${user.name}</td>
-					<td>${user.gender}</td>
-					<td>${user.status}</td>
-					 <td>
-						<a href="#editUserModal" class="settings" title="Settings" data-toggle="modal"><i id="edit-btn" class="material-icons" data-id="${user.id}" data-toggle="tooltip">&#xE8B8;</i></a>
-						<a href="#deleteUserModal" class="delete" title="Delete" data-toggle="modal"><i id="delete-btn" class="material-icons" data-id="${user.id}" data-toggle="tooltip">&#xE5C9;</i></a>
-                     </td>
+					<td>${user.userID}</td>
+					<td>${user.userLastName}</td>
+					<td>${user.userFirstName}</td>
+                    <td>${user.userBirthDay}</td>
+                    <td>${user.userEmail}</td>
+                    <td>${user.userPhone}</td>
+                    <td>${user.userGender}</td>
+                    <td>
+                        <a href="#editUserModal" class="settings" title="Settings" data-toggle="modal"><i id="edit-btn" class="material-icons" data-id="${user.id}" data-toggle="tooltip">&#xE8B8;</i></a>
+                        <a href="#deleteUserModal" class="delete" title="Delete" data-toggle="modal"><i id="delete-btn" class="material-icons" data-id="${user.id}" data-toggle="tooltip">&#xE5C9;</i></a>
+                    </td>
                 </tr>
 			`
                 })
